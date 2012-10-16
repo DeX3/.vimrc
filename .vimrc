@@ -4,20 +4,33 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" let Vundle manage Vundle
-" required! 
+" Installed plugins
 Bundle 'gmarik/vundle'
 
-" original repos on github
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kien/ctrlp.vim'
+Bundle 'camelcasemotion'
+Bundle 'AutoClose'
+Bundle 'bsl/obviousmode'
+Bundle 'flazz/vim-colorschemes'
+Bundle 'a.vim'
+Bundle 'ghewgill/vim-scmdiff'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-repeat'
+Bundle 'OmniCppComplete'
 
 
 set number
 
 syntax on
 
-colorscheme default
+"bright schemes
+"colorscheme default
+colorscheme habilight
+
+"dark schemes
+"colorscheme mustang 
+
 set background=light
 
 set sw=4
@@ -105,32 +118,35 @@ nnoremap <silent><S-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><C-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
-" Keymappings for fuzzyfinder
-nnoremap <silent><C-S-t> :FufCoverageFile<CR>
-imap <silent><C-S-t> <Esc><C-S-t>
-let fuf_keyOpen = '<C-CR>'
-let fuf_keyOpenTabpage = '<CR>'
+"Enable creation of ctags with :gentags
+command! GenTags !ctags -R --c++-kinds=+p --fields=+ia --extra=+q .
 
-"Taglist stuff
-map <F6> :TlistOpen<CR>/
-imap <F6> <Esc><F6>
-let Tlist_Show_One_File=1
-let Tlist_Close_On_Select=1
+"Add libstdc++ to tags:
+set tags+=~/.vim/tags/cpp
 
-"Temporary build mappings
-nmap <C-S-d> :!scripts/deploy.sh<CR>
-imap <C-S-d> <ESC><C-S-d>
-nmap <C-S-c> :!make clean<CR>
+" OmniCppComplete
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest,preview
+
 
 "Movement in wrapped lines
-noremap <buffer> <silent> j gj
-noremap <buffer> <silent> k gk
-noremap <buffer> <silent> 0 g0
-noremap <buffer> <silent> $ g$
+nmap j gj
+nmap k gk
+nmap 0 g0
+nmap $ g$
 
 
 " word wrap without automatic linebreaks
-set wrap
+set nowrap
 set linebreak
 set nolist
 set textwidth=0
@@ -141,3 +157,14 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 "Map autocomplete to ctrl+space
 imap <C-Space> <C-n>
+
+"Obvious mode
+set laststatus=2
+
+"Bind default motion keys to camelcasemotion keys
+nmap w ,w
+nmap b ,b
+nmap e ,e
+
+nmap <C-h> <Esc>:A<CR>
+nmap <C-F5> :source $MYVIMRC<CR>
