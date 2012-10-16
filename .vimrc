@@ -4,20 +4,32 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" let Vundle manage Vundle
-" required! 
+" Installed plugins
 Bundle 'gmarik/vundle'
 
-" original repos on github
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kien/ctrlp.vim'
+
+Bundle 'AutoClose'
+Bundle 'bsl/obviousmode'
+Bundle 'tpope/vim-surround'
+Bundle 'camelcasemotion'
+Bundle 'flazz/vim-colorschemes'
+Bundle 'a.vim'
+Bundle 'ghewgill/vim-scmdiff'
 
 
 set number
 
 syntax on
 
-colorscheme default
+"bright schemes
+"colorscheme default
+colorscheme habilight
+
+"dark schemes
+"colorscheme mustang 
+
 set background=light
 
 set sw=4
@@ -105,22 +117,11 @@ nnoremap <silent><S-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><C-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><C-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
-" Keymappings for fuzzyfinder
-nnoremap <silent><C-S-t> :FufCoverageFile<CR>
-imap <silent><C-S-t> <Esc><C-S-t>
-let fuf_keyOpen = '<C-CR>'
-let fuf_keyOpenTabpage = '<CR>'
-
 "Taglist stuff
 map <F6> :TlistOpen<CR>/
 imap <F6> <Esc><F6>
 let Tlist_Show_One_File=1
 let Tlist_Close_On_Select=1
-
-"Temporary build mappings
-nmap <C-S-d> :!scripts/deploy.sh<CR>
-imap <C-S-d> <ESC><C-S-d>
-nmap <C-S-c> :!make clean<CR>
 
 "Movement in wrapped lines
 noremap <buffer> <silent> j gj
@@ -141,3 +142,14 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 "Map autocomplete to ctrl+space
 imap <C-Space> <C-n>
+
+"Obvious mode
+set laststatus=2
+
+"Bind default motion keys to camelcasemotion keys
+nmap w ,w
+nmap b ,b
+nmap e ,e
+
+nmap <C-h> :A<CR>
+nmap <C-F5> :source $MYVIMRC<CR>
