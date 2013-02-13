@@ -19,6 +19,14 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'OmniCppComplete'
 
+Bundle 'AutoClose'
+Bundle 'bsl/obviousmode'
+Bundle 'tpope/vim-surround'
+Bundle 'camelcasemotion'
+Bundle 'flazz/vim-colorschemes'
+Bundle 'a.vim'
+Bundle 'ghewgill/vim-scmdiff'
+
 
 set number
 
@@ -137,6 +145,11 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
+"Taglist stuff
+map <F6> :TlistOpen<CR>/
+imap <F6> <Esc><F6>
+let Tlist_Show_One_File=1
+let Tlist_Close_On_Select=1
 
 "Movement in wrapped lines
 nmap j gj
